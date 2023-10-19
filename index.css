@@ -1,0 +1,172 @@
+body{
+    background-color: #b4b7b7;;
+}
+
+.add-to-cart-button{
+    border-radius: 20px;
+    background-color: #07aa07;
+    color: white;
+    padding: 8px;
+    margin: 5px;
+}
+
+h2{
+    margin: 40px 20px 20px 20px;
+}
+
+
+.images{
+    width: 200px;
+    border-radius: 20px;
+}
+.numberInput{
+width: 50px;
+}
+
+.cartProducttext{
+    color: red;
+}
+.cartQuantity{
+    color: orange;
+}
+
+.card{
+    border:solid 2px black;
+    width: 200px;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+form{
+    border: solid 2px black;
+    width: 300px;
+    padding: 50px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none;
+    cursor: pointer; 
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.checkoutDiv{
+    align-items: center;
+    /* display: flex; */
+    justify-content: center;}
+
+    .checkOut{
+    position:relative; z-index: 2;
+    background-color: black;
+    color: #2591ff;
+    padding: 20px;
+    width: 10em;
+    border-radius: 1em;
+    margin-left: 2em;
+    }
+    .checkOutButtonDiv{
+        background-color:#2591ff ;
+        position:relative; z-index: 1;
+    }
+
+ .checkoutInfo{
+        align-items: center;
+        display: flex;
+        justify-content: center;}
+.checkOutimages{
+    width: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+}
+#checkoutcart{
+    display: initial;
+    text-align: center;
+    text-transform: uppercase;   }
+    
+
+
+            /*------------------ The Modal ------------------*/
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);    
+    }
+
+    .modal-content {
+        position: absolute;
+        display:inline-table;
+        left: 50%;
+        right: 50%;
+        bottom: 20;
+        background-color: hsl(196, 92%, 54%);
+        width: 50%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 2s;
+        animation-name: slideIn;
+        animation-duration: 2s
+      }
+      @-webkit-keyframes slideIn {
+        from {bottom: -300px; opacity: 0} 
+        to {bottom: 0; opacity: 1}
+      }
+.modal-tiltle{
+  padding: 2px 16px;
+  color: white;
+  text-align: center;
+}
+
+.modal-header{
+    background-color: #5208f1;
+    padding: 2px 16px;
+}
+
+.modal-body {
+    padding: 2px 16px;
+    display: flex;
+
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #cart-form{
+    border: solid black;
+    width: 500px;
+    padding: 20px;
+  }
+/* form field *-----------*/
+  small {
+    color: #dc3545;
+}
+
+.error {
+    border-color: #dc3545;
+}
+
+.success {
+    border-color: rgb(4, 236, 23);
+}

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<h1>Shipping</h1>
+<h3 class="checkoutInfo">Order Summary</h3>
+
+<div id="checkoutcart"></div><hr>
+<form id="form">
+    <h1>Shipping Details</h1>
+    
+    <div class="name">
+        <label for="name">Full Name:</label><br>
+        <input type="text" id="name">
+        <small></small>
+    </div>
+        <br>
+    <div>
+        <label for="Phone-number">Phone Number:</label><br>
+        <input id="Phone-number" type="tel" name="Phone-number">
+        <small></small>
+    </div>
+        <br>
+
+    <div>
+        <label for="email">E-mail Address:</label><br>
+        <input id="email" name="email" type="email">
+        <small></small>
+    </div>
+        <br>
+
+    <div>
+        <label>Delivery Address:</label><br>
+            <div>
+                <input  id="street" placeholder="Street Address" type="text">
+            <small></small>
+        </div>
+            <br>
+        <div>
+            <input  id="city" placeholder="city" type="text">
+            <small></small>
+        </div>
+            <br>
+        <div>
+            <input  id="Zipcode" placeholder="Postal/Zip code" type="text">
+            <small></small>
+        </div>
+    </div>
+        <br>
+    <input type="submit" value="submit">
+</form>
+
+
+
+
+    <script>
+    window.addEventListener("DOMContentLoaded", () => {
+    const checkoutcartDiv = document.getElementById("checkoutcart");
+
+    var queryString = window.location.search;
+    var params = new URLSearchParams(queryString);
+
+    const cartItems = [];
+    let index = 1;
+
+    while (params.has(`product${index}`)) {
+        var productName = params.get(`product${index}`);
+        var quantity = params.get(`quantity${index}`);
+        var price = params.get(`price${index}`);
+        var catogeroy = params.get(`catogeroy${index}`);
+        var image = params.get(`image${index}`);
+
+
+        cartItems.push({ productName, quantity, price,catogeroy, image });
+        index++;
+    }
+    var total= 0;
+    var totalOfAll=0;
+    cartItems.forEach((item) => {
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("checkoutDiv")
+        var totalPrice = parseFloat(item.price)* parseInt(item.quantity)
+        total += totalPrice;
+
+        totalOfAll += totalPrice;
+
+        cartItemDiv.innerHTML = 
+        `<p class="cartProducttext">${item.productName}, $${item.price}, ${item.catogeroy} </p> 
+        <img class="checkOutimages" src="${item.image}" alt="${item.productName}"/> 
+        <p class="cartQuantity"> Quantity: ${item.quantity}</p>
+        <p class="cartTotal"> Total: $${totalPrice.toFixed(2)}</p>`;
+        checkoutcartDiv.appendChild(cartItemDiv);
+
+         
+
+    });
+
+    const totalDiv = document.createElement('div');
+         totalDiv.classList.add("totalDivTest");
+    totalDiv.innerHTML = `<p class="totalOfAll"> Total Products: $${totalOfAll.toFixed(2)}</p>`;
+    checkoutcartDiv.appendChild(totalDiv);
+
+   
+});
+
+
+//////  form validation ////
+var phoneNumber = document.getElementById("Phone-number");
+
+var checkoutForm = document.getElementById("form");
+var name = document.getElementById("name");
+var streetAddress = document.getElementById("street");
+var City = document.getElementById("city");
+var postCode = document.getElementById("Zipcode");
+
+
+checkoutForm.addEventListener("submit", function(e){
+        e.preventDefault();
+
+
+
+var isNameValid = checkName(name);
+var isPhoneNumberValid = checkPhonenumber(phoneNumber);
+var isEmailValid = checkEmail(email);
+var isStreetValid = checkStreet(streetAddress);
+var isCityValid = checkCity(City);
+var isPostcodeValid = checkPostcode(postCode);
+
+        var isFormValid = isNameValid&&
+        isPhoneNumberValid&&
+        isEmailValid&&
+        isStreetValid&&
+        isPostcodeValid;
+        if(isFormValid) {
+            alert("Form submitted successfully")
+        }
+    });
+
+    checkoutForm.addEventListener("input", function(e){
+        var phoneNumber = document.getElementById("Phone-number");
+switch (e.target.id){
+    case "name":
+        checkName();
+        break;
+        case "Phone-number":
+            checkPhonenumber();
+        break;
+        case "email":
+            checkEmail();
+        break;
+        case "street":
+            checkStreet();
+        break;
+        case "city":
+            checkCity();
+        break;
+        case "Zipcode":
+            checkPostcode();
+        break;
+}});
+
+
+// this variable checks if value is an empty string. the function returns true if the value is not an empty string and false if empty
+const isEmpty = value => value == '' ? true : false;
+
+/// this function checks if lenght falls within the range (min-max)
+function isBetween (length, min, max)  { 
+    console.log(length)
+    const between = length.length >= min && length.length <= max ? true : false;
+    return between;   
+}
+/// this function checks if email matches the regex expression //
+
+function showError(input, message) {
+        var formField = input;
+        console.log(formField)
+        formField.classList.remove("success");
+        formField.classList.add("error");
+        var error = formField.parentElement.querySelector("small");
+    if (error)
+    {
+      error.textContent = message;
+    }
+  }
+
+
+
+
+
+
+
+
+
+function showSuccess(input) {
+        var formField = input;
+        
+        formField.classList.add("success");
+        formField.classList.remove("error");
+        var error = formField.parentElement.querySelector("small");
+    if (error)
+    {
+            error.textContent = "";
+    }
+}
+
+function checkName(){
+    var name = document.getElementById("name");
+
+    
+
+        let valid = false;
+        var min = 2,
+        max =25;
+        var fullName = name;
+        console.log(name.value)
+    if(isEmpty(fullName.value))
+    {
+        showError(name, "Full name cannot blank!") 
+    }else if(!isBetween(name.value,min,max))
+    {   showError(name, ` Name must be between ${min} and ${max} character`)
+    }else
+    {
+        showSuccess(name)
+        valid = true
+    }
+    return valid
+}
+
+function checkPhonenumber (){
+    var phoneNumber = document.getElementById("Phone-number");
+
+    const regex = /^[0-9]+$/;
+
+    if(isEmpty(phoneNumber.value))
+    {
+        showError(phoneNumber,"Phone Number cannot be blank!")
+        return false;
+    }
+    else if(!regex.test(phoneNumber.value))
+    {
+        showError(phoneNumber,"Invalid Characters in Phone Number!")
+        return false;
+    }else
+    {
+        showSuccess(phoneNumber)
+        return true;
+    }
+
+
+}
+
+function checkEmail (){
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+    if(isEmpty(email.value))
+    {
+        showError(email, "E-mail Cannot be Blank!")
+        return false;
+    }
+
+    else if (!regex.test(email.value))
+    {
+        showError(email,"Invalid E-mal Address!")
+        return false;
+    }else 
+    {
+        showSuccess(email)
+        return true;
+    }
+}
+
+
+
+
+
+
+
+function checkStreet() {
+    var street = document.getElementById("street");
+    if (isEmpty(street.value))
+    {
+        showError(street, "Street Address cannot be blank!");
+        return false;
+    } else
+    {
+        showSuccess(street);
+        return true;
+    }
+}
+
+
+
+
+
+
+
+function checkCity() {
+    var cityInput = document.getElementById("city");
+    var onlyLetters = /^[A-Za-z]+$/;
+    
+    if(isEmpty(cityInput.value))
+    {
+        showError(cityInput, "City Cannot be Blank!")
+        return false;
+    } else if (!onlyLetters.test(cityInput.value))
+    {
+        showError(cityInput, "Invalid Characters in City")
+        return false;
+    } else 
+    {
+        showSuccess(cityInput)
+        return true;
+    }
+}
+
+
+
+
+
+
+
+    function checkPostcode(){
+        var postcodeInput = document.getElementById("Zipcode");
+
+       if(isEmpty (postcodeInput.value)){
+        showError(postcodeInput,"Postcode cannot be Blank")
+        return false;
+       } else 
+       {
+        showSuccess(postcodeInput)
+        return true
+       }
+    }
+
+
+
+</script>
+
+</body>
+</html>

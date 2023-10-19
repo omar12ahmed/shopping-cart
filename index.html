@@ -1,0 +1,74 @@
+<!--
+     Shopping cart
+
+     In this task I want to be able to see 5 different products of your choice
+     To do this, use classes
+
+     Each product should have:
+        1. Name
+        2. Price
+        3. Category
+
+     We will also want to have a shopping cart (this can be just a simple array for now)
+     I want to have functions, which allow us to add products to the shopping cart and remove them as well
+
+     Shopping cart should have:
+        1. Display all products
+        2. Display prices next to the products
+        3. Show combined price of the shopping cart
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Add a tag for availible producs -->
+   
+		<div id="products">
+			<div class="heading">
+				<h1>Omar's Shop</h1>
+			</div>
+        </div>
+        
+        <!-- Add more product items as needed -->
+   
+    <!-- Add a tag for shopping cart -->
+
+    <div id="shopping-cart">
+        <div class="heading">
+            <h2>Shopping cart</h2>
+        </div>
+    </div>
+
+    <div id="shoppingcart"></div>
+
+    <div class="checkOutButtonDiv"><button class="checkOut" id="checkOut">Checkout</button></div>
+
+    <!--------------- The Modal ------------------------>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" id="close">&times;</span>
+        <h2 class="modal-tiltle">Checkout</h2>
+      </div>
+      <div class="modal-body" id="modal-body">
+      
+      </div>
+      <div class="modal-footer">
+        <button id="modalCart">Add to Cart</button>
+        <button class="cancel" id="cancel">Cancel</button>
+      </div>
+    </div>
+  
+  </div>
+</body>
+<script src="index.js"></script>
+</html>
